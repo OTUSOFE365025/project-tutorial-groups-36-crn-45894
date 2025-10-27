@@ -19,4 +19,4 @@
 | **UC-17: Detect Fault** | Periodically the system will ping the school’s data source systems to see if safe exchange of data can still occur. If there is no response, the system reverts to a safe state and users are updated on the situation. | R3, RS11, RA6, RD1, RD3, RD4 |
 
 
-![Image of use case diagram](images\Use_Case_Diagrams_Project(f).png)
+![Image of use case diagram](images/Use_Case_Diagrams_Project(f).png)
