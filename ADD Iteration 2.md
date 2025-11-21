@@ -91,3 +91,142 @@ Modules that support the use cases:
 | Email Server | This external system sends emails and notifications triggered by the application through the service agents (CRN-1). |
 | SSO Provider | This external system adapts the Institution’s trusted SSO provider into the AIDAP system (QA-3, CRN-2, CON-1, CON-4).  |
 | AIDAP Database | This data store holds the system’s persistent data, including but not limited to: conversational history, user preferences, and logs accessed through the data access modules. It will also be responsible for storing backups of the system. The data is stored independently of the school’s existing systems to reduce their complexity. (UC-6, QA-4, CRN-4, CON-8). |
+
+UC-1: Publish announcements
+![Sequnence Diagram Of UC-1]()
+
+| Method Name | Description |
+| ----- | :---- |
+| **Element: User Text Receiver** |  |
+| void enterAnnouncementText(String text) | The Lecturer enters the announcement text into the client interface. |
+| void forwardTextInput(String text) | Forwards the raw text input to the AIDAP UI on the server side. |
+| **Element: AIDAP UI** |  |
+| void submitAnnouncementRequest(String text) | Sends the announcement request to the View Controller for processing. |
+| boolean showConfirmation(Status status) | Displays a success confirmation message to the user. |
+| **Element: View Controller** |  |
+| void submitAnnouncementRequest(String text) | Initiates the Text Workflow that handles announcement logic. |
+| void buildAnnouncementResponse(Status status) | Builds a formatted success/failure response for the UI. |
+| **Element: Text Workflow** |  |
+| void processAnnouncement(String text) | Sends the announcement input to Text Logic for interpretation. |
+| **Element: Text Logic** |  |
+| AnnouncementInfo extractAnnouncementInfo(String inputText) | Extracts intent, course, and scope. |
+| **Element: Textual AI Cluster** |  |
+| AnnouncementInfo returnAnnouncementInfo(AnnouncementInfo info) | Returns structured NLP results back to logic. |
+| **Element: Announcement** |  |
+| Announcement create(AnnouncementInfo info) | Instantiates an Announcement domain model object. |
+| **Element: AI Command Interpreter** |  |
+| void handlePublishAnnouncement(Announcement announcement) | Interprets the publish command and prepares LMS integration. |
+| boolean returnPublishResult() | Receives the result of the LMS call and returns it upstream. |
+| **Element: External REST API Helper** |  |
+| LmsRequest buildLmsAnnouncementRequest(Announcement announcement) | Creates an LMS-compatible REST payload for announcement publishing. |
+| **Element: LMS Service Agent** |  |
+| void publishAnnouncement(Announcement announcement) | Publishes announcement to LMS. |
+| boolean returnPublishStatus() | Returns LMS confirmation indicating whether the operation succeeded. |
+
+UC-2: Query academic information
+![Sequnence Diagram Of UC-2]()
+
+| Method Name | Description |
+| :---- | :---- |
+| **Element: User Text Receiver** |  |
+| Upload(requestText) | Forwards the student’s query text to the View Controller to start system processing. |
+| DeliverText(requestText) | Displays the final AI-generated response back to the student. |
+| **Element: AIDAP UI** |  |
+| ForwardQuestion(queryText) processing. | Forwards the student’s query text to the View Controller to start system  |
+| DisplayAnswer(aiResponse) | Displays the final AI-generated response back to the  student.  |
+
+| Element: View Controller |  |
+| :---- | :---- |
+| StartWorkflow(queryText)  | Initializes the text workflow and passes the query to be interpreted. |
+
+| Element: TextWorkFlow |  |
+| :---- | :---- |
+| ExtractQueryDetails(intent, entities)  | Converts raw text into structured query details to guide NLP processing. |
+
+| Element: TextLogic |  |
+| :---- | :---- |
+| PerformNLP(aiQuery)  | Sends the structured query to the NLP engine for intent/entity recognition. |
+| returnNLPResult(nlpResult)  | Receives the NLP results from the AI cluster.  |
+| create(intent, entities) | Constructs a structured AI Query Object for downstream components. |
+| Interpret(prompt) | Interprets or enriches the prompt object prior to external API request creation.  |
+
+| Element: AI Cluster |  |
+| :---- | :---- |
+| DescriptionreturnNLPResult(nlpResult)  | Returns extracted NLP results intent, entities, classification scores to Text Logic. |
+
+| Element: Data Source Prompt |  |
+| :---- | :---- |
+| PromptInstance | Represents a constructed prompt instance containing interpreted user intent. |
+
+| Element: AI Command Interpreter |  |
+| :---- | :---- |
+| BuildRequestUsingPrompt(queryPayload) | Transforms the AI prompt into a REST request that external services can process. |
+
+| Element: External REST API helper |  |
+| :---- | :---- |
+| DescriptionFetchAcademicData(restRequest)  | Sends the REST request to academic data systems and retrieves the dataset. |
+| returnAcademicDataset(academicDataset)  | Returns the academic dataset retrieved from external systems. |
+
+| Element: Academic Service Agent |  |
+| :---- | :---- |
+| returnAcademicDataset(academicDataset) | Returns academic data back to the External REST API Helper for system use. |
+
+| Element: View Controller |  |
+| :---- | :---- |
+| returnAcademicDataset(academicDataset) | Returns academic data back to the External REST API Helper for system use. |
+
+| Element: AIDAP UI |  |
+| :---- | :---- |
+| AcademicInformationReturned(aiResponse) | AcademicInformationReturned(aiResponse) |
+
+UC-5: Publish or modify course material
+![Sequnence Diagram Of UC-5]()
+
+| Method Name | Description |
+| ----- | :---- |
+| **Element: User Text Receiver** |  |
+| void requestMaterialUpdate(String inputText) | Initiates the material update request when the lecturer enters the input text. |
+| void forwardText(String inputText) | Forwards the lecturer’s raw input text to the AIDAP UI for further processing. |
+| **Element: AIDAP UI** |  |
+| void submitMaterialRequest(String inputText) | Sends the incoming material update request to the View Controller. |
+| boolean showConfirmation(Status status) | Displays a response or confirmation message to the lecturer after LMS processing. |
+| **Element: View Controller** |  |
+| void beginMaterialWorkflow() | Starts the workflow that handles material upload or update. |
+| void buildMaterialUpdateResponse() | Constructs the response sent back to the UI once LMS processing is completed. |
+| **Element: UI Interaction Workflow** |  |
+| void parseMaterialDetails(String inputText) | Processes and prepares material details extracted from the lecturer's command. |
+| **Element: Text Logic** |  |
+| MaterialInfo extractMaterialInfo(String inputText) | Uses NLP to extract structured information such as material title, type, course, and version. |
+| CourseMaterial create(MaterialInfo materialInfo) | Creates a CourseMaterial domain object using extracted structured data. |
+| boolean executeMaterialUpdate(CourseMaterial materialInstance) | Triggers the material-update command execution using the constructed domain object. |
+| **Element: Textual AI Cluster** |  |
+| MaterialInfo extractMaterialInfo(String inputText) | Parses natural-language material update instructions and returns structured semantic data. |
+| **Element: Course Material** |  |
+| CourseMaterial create(MaterialInfo materialInfo) | Constructs a CourseMaterial instance using extracted material information. |
+| **Element: AI Command Interpreter** |  |
+| void executeMaterialUpdate(CourseMaterial materialInstance) | Passes the material update domain object to the REST helper for LMS processing. |
+| boolean returnUpdateResult()  | Receives the boolean success value from the LMS request and passes it back upstream. |
+| **Element: External REST API Helper** |  |
+| LmsRequest buildLMSMaterialRequest(CourseMaterial materialInstance) | Builds a request payload compatible with the LMS using the CourseMaterial instance. |
+| **Element: LMS Service Agent** |  |
+| boolean syncMaterial(CourseMaterial materialInstance) | Publishes announcement to LMS. |
+| boolean returnSyncStatus() | Returns LMS confirmation indicating whether the operation succeeded. |
+
+**Step 7: Perform Analysis of Current Design and Review Iteration Goal and Achievement of Design Purpose (Kanban Board)**
+
+| Not Addressed | Partially Addressed | Completely Addressed | Design Decisions Made During Iteration |
+| :---- | :---- | :---- | :---- |
+|  |  | UC-1 | The modules spanning the architectural layers and the initial set of interfaces supporting this specific use case have been specified. |
+|  |  | UC-2 | The modules spanning the architectural layers and the initial set of interfaces supporting this specific use case have been specified. |
+|  |  | UC-5 | The modules spanning the architectural layers and the initial set of interfaces supporting this specific use case have been specified. |
+| QA-1 |  |  | No relevant decisions made. Elements that participate in the use case which is associated with the scenario are not yet identified. |
+| QA-2 |  |  | No relevant decisions made. Elements that participate in the use cases which are associated with the scenario are not yet identified. |
+|  |  | QA-3 | Integration with the institution’s SSO provider has been planned at the architectural level with the Security module. Other security policies like encryption and user tokens are also established. |
+|  |  | QA-5 | Modules and related services spanning the architectural layers are fully decomposed. Initial supporting interfaces have also been specified. |
+|  |  | CON-3 | Implementation using React.js and Node.js should allow easier transferral to cloud. Inclusion of Docker and Kubernetes allows the AIDAP system to be fully cloud-deployable. |
+|  | CON-5 |  | The architecture supports scaling by separating the web and application tiers, however detailed load-balancing strategies have not been decided. |
+|  | CON-7 |  | LMS service agents that send and retrieve information from external services have been identified and decomposed. The system is now fully cloud integratable with Docker and Kubernetes. However, no specific server-loading structure has been decided. |
+| CON-9 |  |  | No relevant decisions have been made. |
+|  |  | CRN-2 | Role-based access has been detailed in the domain objects and initial domain model.  |
+|  |  | CRN-3 | Modifiable AI models have been addressed through the domain objects and the new module diagram. The inclusion of System Monitoring/Modification Module allows certain users to change or modify the AI model. |
+|  | CRN-4 |  | Backups and failstates have been detailed in the domain objects and initial domain model. However, no specific organization of modules or technology have been made. |
