@@ -93,7 +93,7 @@ Modules that support the use cases:
 | AIDAP Database | This data store holds the system’s persistent data, including but not limited to: conversational history, user preferences, and logs accessed through the data access modules. It will also be responsible for storing backups of the system. The data is stored independently of the school’s existing systems to reduce their complexity. (UC-6, QA-4, CRN-4, CON-8). |
 
 UC-1: Publish announcements
-![Sequnence Diagram Of UC-1]()
+![Sequnence Diagram Of UC-1](images/Sequence_Diagram_UC1_IT2.png)
 
 | Method Name | Description |
 | ----- | :---- |
@@ -124,7 +124,7 @@ UC-1: Publish announcements
 | boolean returnPublishStatus() | Returns LMS confirmation indicating whether the operation succeeded. |
 
 UC-2: Query academic information
-![Sequnence Diagram Of UC-2]()
+![Sequnence Diagram Of UC-2](images/Sequence_Diagram_UC2_IT2.png)
 
 | Method Name | Description |
 | :---- | :---- |
@@ -180,7 +180,7 @@ UC-2: Query academic information
 | AcademicInformationReturned(aiResponse) | AcademicInformationReturned(aiResponse) |
 
 UC-5: Publish or modify course material
-![Sequnence Diagram Of UC-5]()
+![Sequnence Diagram Of UC-5](images/Sequence_Diagram_UC5_IT2.png)
 
 | Method Name | Description |
 | ----- | :---- |
