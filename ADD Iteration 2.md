@@ -41,13 +41,13 @@ Iteration 1 also does not address every design objective, thus we are also targe
 **Step 6:  Sketch Views and Record Design Decisions Based On Step 5**
 
 Initial Domain Diagram:
-**![Initial Domain Diagram]()**
+![Initial Domain Diagram](images/Inital_Domain_Diagram_IT2.png)
 
 Domain objects associated with the use case model (Key: UML):
-**![Domain objects associated with the use case model diagram]()**
+![Domain objects associated with the use case model diagram](images/Domain_Objects_Associated_With_The_Use_Case_Model_Diagram_IT2.png)
 
 Modules that support the use cases:
-**![Modules that support the use cases diagram]()**
+![Modules that support the use cases diagram](images/Modules_That_Support_The_Use_Cases_Diagram_IT2.png)
 
 | Element | Responsibility |
 | :---- | :---- |
