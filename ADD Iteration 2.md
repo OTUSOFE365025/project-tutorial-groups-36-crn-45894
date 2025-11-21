@@ -219,8 +219,8 @@ UC-5: Publish or modify course material
 |  |  | UC-1 | The modules spanning the architectural layers and the initial set of interfaces supporting this specific use case have been specified. |
 |  |  | UC-2 | The modules spanning the architectural layers and the initial set of interfaces supporting this specific use case have been specified. |
 |  |  | UC-5 | The modules spanning the architectural layers and the initial set of interfaces supporting this specific use case have been specified. |
-| QA-1 |  |  | No relevant decisions made. Elements that participate in the use case which is associated with the scenario are not yet identified. |
-| QA-2 |  |  | No relevant decisions made. Elements that participate in the use cases which are associated with the scenario are not yet identified. |
+| QA-1 |  |  | No relevant decisions made regarding performance. |
+| QA-2 |  |  | No relevant decisions made regarding availability. |
 |  |  | QA-3 | Integration with the institution’s SSO provider has been planned at the architectural level with the Security module. Other security policies like encryption and user tokens are also established. |
 |  |  | QA-5 | Modules and related services spanning the architectural layers are fully decomposed. Initial supporting interfaces have also been specified. |
 |  |  | CON-3 | Implementation using React.js and Node.js should allow easier transferral to cloud. Inclusion of Docker and Kubernetes allows the AIDAP system to be fully cloud-deployable. |
