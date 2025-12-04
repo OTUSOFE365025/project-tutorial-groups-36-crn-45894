@@ -19,3 +19,15 @@ Defining quality attributes and constraint requirements based on the requirement
 | Blake Heselden | Iteration 1, Iteration 2 |
 | Steven Sun     | Iteration 1, Iteration 2 |
 | Evan Tome      | Iteration 1, Iteration 2 |
+
+### Phase 3: Iteration 3 and ATAM
+- [Iteration 3](<./ADD%20Iteration%203.md>)
+#### Contribution Matrix
+
+| **Name**       | **Contribution**         |
+| -------------- | ------------------------ |
+| Blake Heselden | Iteration 3, ATAM |
+| Steven Sun     | Iteration 3, ATAM |
+| Evan Tome      | Iteration 3, ATAM |
+
+*Our ATAM process is at the bottom of iteration 3.*
