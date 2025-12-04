@@ -20,6 +20,8 @@ Defining quality attributes and constraint requirements based on the requirement
 | Steven Sun     | Iteration 1, Iteration 2 |
 | Evan Tome      | Iteration 1, Iteration 2 |
 
+***
+
 ### Phase 3: Iteration 3 and ATAM
 - [Iteration 3](<./ADD%20Iteration%203.md>)
 #### Contribution Matrix
