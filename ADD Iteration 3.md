@@ -48,7 +48,7 @@ The instantiation design decisions are summarized in the following table:
 
 **Step 6: Sketch Views and Record Design Decisions**
 
-Refined Deployment Diagram:![][image1]
+![Extended Deployment Diagram](images/Deployment_Diagram_IT3.png)
 
 | Element | Responsibility |
 | :---- | :---- |
@@ -58,7 +58,7 @@ Refined Deployment Diagram:![][image1]
 
 The UML sequence diagram shown below illustrates how the Message Queue that was introduced in this iteration exchanges messages with other elements shown in the deployment diagram to support UC-2 (query academic information), which is associated with QA-1 (performance). It also shows how the Message Queue acts as a middle man between different system elements, containing temporary information until it is requested by the system. This diagram focuses on the communication between physical nodes as we are focusing on the deployment side of the system, hence, no actors will be listed.  
 In this section, we will be taking another look at the sequence diagrams we designed last iteration. Because of the newly defined modules, we will be specifying their general placement in these updated sequence diagrams. Many of the core modules remain the same from the last iteration, so their functionality will not be reiterated.   
-![][image2]  
+![Iteration 3 Use Case 1 Sequence Diagram](images/Sequence_Diagram_UC1_IT3.png)
 UC-1: Publish announcements
 
 | Message Name | Description |
@@ -74,7 +74,7 @@ UC-1: Publish announcements
 | **LMS** |  |
 | passAnswer() | Passes the response/answer from the LMS to the question or message back to the Message Queue. |
 
-![][image3]  
+![Iteration 3 Use Case 2 Sequence Diagram](images/Sequence_Diagram_UC2_IT3.png)
 UC-2: Query academic information
 
 | Message Name | Description |
@@ -90,7 +90,7 @@ UC-2: Query academic information
 | **LMS** |  |
 | passAnswer() | Passes the response/answer from the LMS to the question or message back to the Message Queue. |
 
-![][image4]  
+![Iteration 3 Use Case 5 Sequence Diagram](images/Sequence_Diagram_UC5_IT3.png) 
 UC-5: Publish or modify course material
 
 | Message Name | Description |
@@ -122,7 +122,7 @@ UC-5: Publish or modify course material
 # ATAM Review:
 
 **ATAM Utility Tree**  
-![][image5]
+![Utility Tree](images/Utility_Tree_IT3.png)
 
 **ATAM Risk Assessment**  
 Risks
